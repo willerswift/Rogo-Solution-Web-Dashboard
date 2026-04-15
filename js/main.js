@@ -13,15 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ── Scroll reveal with IntersectionObserver ── */
-  const revealEls = document.querySelectorAll(
-    '.sol-card, .feature, .story-item, .stat, .partner-logo-item, .cta-box'
-  );
-  revealEls.forEach(el => el.classList.add('reveal'));
+  const revealEls = document.querySelectorAll('.reveal');
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // stagger delay for sibling elements
+        // stagger delay for sibling elements that are also being revealed
         const siblings = entry.target.parentElement.querySelectorAll('.reveal');
         const idx = Array.from(siblings).indexOf(entry.target);
         setTimeout(() => {
