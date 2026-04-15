@@ -863,12 +863,12 @@ footer {
 
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
-  .hero-grid { grid-template-columns: 1fr; gap: 48px; padding: 60px 0 80px; text-align: center; }
-  .hero-content { order: 2; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px 80px; text-align: center; }
+  .hero-content { order: 1; }
   .hero h1 { font-size: 36px; }
   .hero p.lead { margin-inline: auto; }
   .hero-cta { justify-content: center; }
-  .stats-panel { order: 1; grid-template-columns: 1fr 1fr; display: grid; }
+  .stats-panel { order: 2; grid-template-columns: 1fr 1fr; display: grid; }
   .stat { border-bottom: 1px solid rgba(255,255,255,.07) !important; border-right: 1px solid rgba(255,255,255,.07); }
   .stat:nth-child(2n) { border-right: 0; }
   
