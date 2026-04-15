@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Demo Dashboard - Rogo Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-app: #0E0E22;
+  --sidebar-bg: #14142F;
+  --primary: #FD3566;
+  --text-main: #FFFFFF;
+  --text-muted: #9CA3AF;
+  --card-bg: #1B1B3A;
+  --border: rgba(255, 255, 255, 0.08);
+  --green: #10b981;
+}
+* { box-sizing: border-box; }
+body, html { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-app); color: var(--text-main); height: 100vh; overflow: hidden; }
+
+.app-container { display: none; height: 100vh; }
+
+/* --- LOGIN VIEW (DARK MODE) --- */
+#view-login {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg-app); z-index: 2000; display: flex; color: var(--text-main);
+}
+.login-left {
+  width: 40%; 
+  background: radial-gradient(circle at 0% 0%, #1a1a3a 0%, #0a0a1a 100%);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; padding: 60px; border-right: 1px solid var(--border);
+}
+/* Glowing background effects - more vibrant and layered */
+.login-left::before {
+  content: ""; position: absolute; top: -20%; right: -20%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(253, 53, 102, 0.25) 0%, transparent 70%);
+  filter: blur(80px); animation: move 12s infinite alternate; z-index: 2;
+}
+.login-left::after {
+  content: ""; position: absolute; bottom: -10%; left: -10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  filter: blur(100px); animation: move 18s infinite alternate-reverse; z-index: 2;
+}
+/* Extra glow for depth */
+.login-glow-extra {
+  position: absolute; top: 40%; left: 30%; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  filter: blur(60px); z-index: 2; pointer-events: none;
+}
+@keyframes move { 
+  0% { transform: translate(0,0) scale(1); } 
+  100% { transform: translate(120px, 80px) scale(1.1); } 
+}
+
+.login-left-grid {
+  position: absolute; inset: 0; 
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px; z-index: 3;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.login-left-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; }
+.login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 80px; }
+.login-logo img { height: 28px; filter: brightness(0) invert(1) !important; }
+.login-logo span { font-weight: 800; font-size: 18px; color: #fff; letter-spacing: -0.5px; }
+
+.thing-green-badge {
+  display: inline-block; width: fit-content; padding: 6px 12px; background: rgba(253, 53, 102, 0.1);
+  color: var(--primary); border-radius: 20px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+  border: 1px solid rgba(253, 53, 102, 0.2);
+}
+
+.login-left h2 { font-size: 42px; font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -1px; }
+.login-left h2 span.highlight { color: var(--primary); }
+
+.login-footer { margin-top: auto; font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+.login-footer strong { color: #fff; }
+
+.login-right { width: 60%; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.login-form-box { width: 100%; max-width: 400px; }
+.login-form-box h3 { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 32px; color: #fff; }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+.input-field { position: relative; }
+.input-field input { 
+  width: 100%; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 8px;
+  font-size: 14px; color: #fff; transition: all 0.2s;
+}
+.input-field input:focus { outline: none; border-color: var(--primary); background: rgba(255, 255, 255, 0.05); }
+.password-toggle { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; }
+
+.login-options { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 32px; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.login-options input { margin-top: 2px; accent-color: var(--primary); }
+
+.btn-login { 
+  width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px;
+  font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(253, 53, 102, 0.2);
+}
+.btn-login:hover { background: #e62e5c; transform: translateY(-1px); }
+
+.login-back-link {
+  display: flex; align-items: center; gap: 8px; color: var(--text-muted);
+  text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 40px;
+  transition: all 0.2s; width: fit-content;
+}
+.login-back-link:hover { color: #fff; transform: translateX(-4px); }
+
+/* SIDEBAR */
+.sidebar { width: 70px; background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+.logo-box { width: 40px; height: 40px; background: transparent; display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+.logo-box img { width: 30px; filter: brightness(0) invert(1); }
+.nav-item { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-bottom: 16px; cursor: pointer; color: var(--text-muted); transition: all 0.2s; }
+.nav-item.active { background: rgba(253, 53, 102, 0.1); color: var(--primary); }
+.nav-item:hover:not(.active) { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.sidebar-footer { margin-top: auto; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.btn-back { width: 40px; height: 40px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; text-decoration: none; transition: background 0.2s; }
+
+/* MAIN CONTENT */
+.main-content { flex: 1; display: flex; flex-direction: column; padding: 24px; overflow-y: auto; position: relative; }
+.header-bar { background: var(--card-bg); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 24px; font-weight: 700; font-size: 18px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+.status-badge { font-size: 12px; background: rgba(16, 185, 129, 0.1); color: var(--green); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+
+.view-section { display: none; width: 100%; }
+.view-section.active { display: block; }
+
+/* --- VIEW 1: DASHBOARD --- */
+.dashboard-grid { display: grid; grid-template-columns: 280px 1fr; gap: 24px; min-height: 0; }
+.panel-left { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 24px; display: flex; flex-direction: column; }
+.panel-title { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #fff; }
+.location-list { display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; }
+.location-item { padding: 16px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+.location-item.active { background: rgba(253, 53, 102, 0.08); border-color: var(--primary); }
+.location-item h5 { margin: 0 0 4px; font-size: 14px; font-weight: 700; color: #fff; }
+.location-item p { margin: 0; font-size: 11px; color: var(--text-muted); }
+.btn-add-location { margin-top: 20px; width: 100%; padding: 12px; border: 1px dashed var(--text-muted); border-radius: 10px; background: transparent; font-weight: 700; color: var(--primary); font-size: 13px; cursor: pointer; transition: all 0.2s; }
+
+.panel-right { display: flex; flex-direction: column; gap: 24px; overflow: hidden; }
+.section-box { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 24px; overflow: hidden; }
+.section-title { font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #fff; }
+.section-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Kịch bản cuộn ngang */
+.scenarios-grid { 
+  display: flex; 
+  gap: 16px; 
+  overflow-x: auto; 
+  padding: 8px 4px 12px 4px;
+  margin: -8px -4px 0 -4px;
+  -webkit-overflow-scrolling: touch;
+}
+.scenario-card { 
+  min-width: 190px;
+  flex-shrink: 0;
+  padding: 16px; 
+  border-radius: 12px; 
+  border: 1px solid var(--border); 
+  background: rgba(255, 255, 255, 0.03); 
+  position: relative; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+}
+.scenario-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-2px); border-color: var(--primary); }
+.scenario-card h5 { margin: 0 0 4px; font-size: 14px; color: #fff; }
+.scenario-card p { margin: 0; font-size: 11px; color: var(--text-muted); }
+.scenario-card .dots { position: absolute; top: 16px; right: 12px; color: var(--text-muted); }
+
+.controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.control-group { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: rgba(255, 255, 255, 0.02); }
+.group-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.group-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; color: #fff; }
+.group-title svg { color: var(--primary); }
+
+.device-list { 
+  max-height: 220px; 
+  overflow-y: auto; 
+  padding-right: 4px; 
+}
+/* Scrollbar cho thiết bị */
+.device-list::-webkit-scrollbar { width: 4px; }
+.device-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.device-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.device-list::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+.device-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; }
+.device-name { font-size: 13px; font-weight: 500; color: #e2e8f0; }
+.device-status { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; color: var(--primary); }
+
+.sensor-box { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.sensor-box:last-child { border-bottom: none; }
+.sensor-label { font-size: 13px; color: var(--text-muted); }
+.sensor-value { font-size: 13px; font-weight: 700; color: #fff; }
+
+.btn-create { position: fixed; bottom: 40px; right: 40px; background: var(--primary); color: #fff; border: none; padding: 14px 28px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 25px rgba(253, 53, 102, 0.3); display: flex; align-items: center; gap: 10px; transition: all 0.2s; z-index: 100; }
+
+/* --- VIEW 2: REPORT --- */
+.report-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+.report-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 24px; display: flex; justify-content: space-between; align-items: center; }
+.report-card-info h5 { margin: 0 0 8px; color: var(--text-muted); font-size: 13px; font-weight: 500; }
+.report-card-info .value { font-size: 24px; font-weight: 800; color: #fff; }
+.sparkline { width: 80px; height: 40px; }
+.main-chart-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 24px; margin-bottom: 24px; }
+.chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.chart-filters { display: flex; gap: 8px; }
+.filter-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.filter-btn.active { background: rgba(253, 53, 102, 0.1); border-color: var(--primary); color: var(--primary); }
+
+.chart-placeholder { height: 340px; width: 100%; position: relative; padding: 20px 0 60px 0; }
+.chart-svg { width: 100%; height: 100%; overflow: visible; cursor: crosshair; }
+.chart-line { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); fill: none; stroke-width: 3; stroke-linecap: round; }
+
+/* Trục và lưới */
+.axis-label { font-size: 9px; fill: #9CA3AF; font-weight: 500; font-family: 'Plus Jakarta Sans', sans-serif; }
+.grid-line { stroke: rgba(255, 255, 255, 0.04); stroke-width: 1; }
+
+/* Tooltip hiện đại */
+.chart-tooltip {
+  position: absolute;
+  background: rgba(13, 13, 34, 0.95);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 11px;
+  pointer-events: none;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  min-width: 160px;
+}
+.tooltip-date { font-size: 10px; color: #9CA3AF; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
+.tooltip-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
+.tooltip-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; display: inline-block; }
+.chart-indicator { stroke: rgba(255,255,255,0.2); stroke-dasharray: 4; display: none; }
+
+.table-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 24px; max-height: 400px; overflow-y: auto; }
+/* Scrollbar cho bảng */
+.table-card::-webkit-scrollbar { width: 4px; }
+.table-card::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.table-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+.demo-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+.demo-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-size: 12px; font-weight: 600; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+.demo-table td { padding: 16px; font-size: 14px; border-bottom: 1px solid var(--border); color: #e2e8f0; }
+
+/* COMMON COMPONENTS */
+.switch { position: relative; display: inline-block; width: 34px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #374151; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(14px); }
+
+#toast {
+  position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 12px; font-weight: 700; z-index: 1000; transition: top 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); display: flex; align-items: center; gap: 10px;
+}
+#toast.show { top: 30px; }
+.animate-update { animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Custom Scrollbar cho cuộn ngang */
+.scenarios-grid::-webkit-scrollbar { height: 4px; }
+.scenarios-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.scenarios-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.scenarios-grid::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+</style>
+</head>
+<body>
+
+<div id="view-login">
+  <div class="login-left">
+    <div class="login-left-grid"></div>
+    <div class="login-glow-extra"></div>
+    <div class="login-left-content">
+      <a href="index.html" class="login-back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Quay lại trang chủ
+      </a>
+      <div class="login-logo">
+        <img src="assets/Logo%20vector.png" alt="Logo">
+        <span>ROGO Solutions</span>
+      </div>
+      <div class="thing-green-badge">Thing Green</div>
+      <h2>Giải pháp sử dụng<br><span class="highlight">năng lượng hiệu quả!</span></h2>
+      <div class="login-footer">
+        © 2021 - 2026<br>
+        <strong>https://rogo.com.vn</strong><br>
+        All Rights Reserved.
+      </div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="login-form-box">
+      <h3>Đăng nhập</h3>
+      <div class="input-group">
+        <label>Địa chỉ email (*)</label>
+        <div class="input-field">
+          <input type="email" placeholder="Nhập địa chỉ email của bạn" id="login-email">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Mật khẩu (*)</label>
+        <div class="input-field">
+          <input type="password" placeholder="Nhập mật khẩu của bạn" id="login-pass">
+          <span class="password-toggle">👁</span>
+        </div>
+      </div>
+      <div class="login-options">
+        <input type="checkbox" id="terms">
+        <label for="terms">Đồng ý với Điều khoản sử dụng, Tuyên bố pháp lý, Chính sách bảo mật</label>
+      </div>
+      <button class="btn-login" onclick="handleLogin()">ĐĂNG NHẬP</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><div style="width:20px;height:20px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;">✓</div><span id="toast-message"></span></div>
+
+<div class="app-container" id="app-container">
+  <aside class="sidebar">
+    <div class="logo-box"><img src="assets/Logo%20vector.png" alt="Logo"></div>
+    <div class="nav-item active" id="tab-dashboard" title="Điều khiển">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </div>
+    <div class="nav-item" id="tab-report" title="Báo cáo điện năng">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+    </div>
+    <div class="sidebar-footer">
+      <a href="index.html" class="btn-back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="header-bar">
+      <span id="current-location-title">Phòng tiếp khách</span>
+      <span class="status-badge" id="header-status">Đang kết nối (WILE 3.0)</span>
+    </div>
+
+    <!-- VIEW 1: DASHBOARD -->
+    <div id="view-dashboard" class="view-section active">
+      <div class="dashboard-grid">
+        <div class="panel-left">
+          <div class="panel-title">Danh sách vị trí</div>
+          <div class="location-list" id="location-list">
+            <div class="location-item active" data-location="living"><h5>Phòng tiếp khách</h5><p>Gateway: R-01-Lobby</p></div>
+            <div class="location-item" data-location="meeting"><h5>Phòng họp lớn</h5><p>Gateway: R-02-Main</p></div>
+            <div class="location-item" data-location="rd"><h5>Khu vực R&D</h5><p>Gateway: R-03-Lab</p></div>
+            <div class="location-item" data-location="warehouse"><h5>Kho vận hành</h5><p>Gateway: R-04-Whse</p></div>
+            <div class="location-item" data-location="exec"><h5>Văn phòng điều hành</h5><p>Gateway: R-05-VIP</p></div>
+          </div>
+          <button class="btn-add-location">+ THÊM VỊ TRÍ</button>
+        </div>
+        <div class="panel-right" id="dashboard-content-panel">
+          <div class="section-box">
+            <div class="section-title">Kịch bản sử dụng</div>
+            <div class="section-subtitle">Mặc định hệ thống</div>
+            <div class="scenarios-grid" id="scenarios-container"></div>
+          </div>
+          <div class="section-box">
+            <div class="section-title">Bảng điều khiển thiết bị</div>
+            <div class="controls-grid">
+              <div class="control-group">
+                <div class="group-header"><div class="group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>Hệ thống điều hòa</div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                <div class="device-list" id="ac-container"></div>
+              </div>
+              <div class="control-group">
+                <div class="group-header"><div class="group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M4.93 4.93l1.41 1.41M2 12h2M4.93 19.07l1.41-1.41M12 22v-2M17.66 17.66l-1.41-1.41M22 12h-2M17.66 6.34l-1.41 1.41"/></svg>Hệ thống chiếu sáng</div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="device-list" id="light-container"></div>
+              </div>
+            </div>
+            <div class="controls-grid" style="margin-top: 24px;">
+              <div class="control-group"><div class="group-title" style="margin-bottom:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> Chỉ số môi trường</div><div id="sensor-env"></div></div>
+              <div class="control-group"><div class="group-title" style="margin-bottom:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Trạng thái an ninh</div><div id="sensor-security"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-create"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> TẠO KỊCH BẢN MỚI</button>
+    </div>
+
+    <!-- VIEW 2: REPORT -->
+    <div id="view-report" class="view-section">
+      <div class="report-summary-grid">
+        <div class="report-card">
+          <div class="report-card-info"><h5>Tổng tiêu thụ điện</h5><div class="value">120kWh</div></div>
+          <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,30 Q20,10 40,25 T80,5 L100,20" fill="none" stroke="#10b981" stroke-width="3"/></svg>
+        </div>
+        <div class="report-card">
+          <div class="report-card-info"><h5>Chi phí ước tính</h5><div class="value">540.000đ</div></div>
+          <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,10 Q25,35 50,15 T100,25" fill="none" stroke="#FD3566" stroke-width="3"/></svg>
+        </div>
+        <div class="report-card">
+          <div class="report-card-info"><h5>Carbon (ppm)</h5><div class="value">25 ppm</div></div>
+          <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,20 L20,15 L40,25 L60,10 L80,18 L100,5" fill="none" stroke="#f59e0b" stroke-width="3"/></svg>
+        </div>
+      </div>
+      <div class="main-chart-card">
+        <div class="chart-header">
+          <div class="section-title" style="margin:0">Báo cáo điện năng chung</div>
+          <div class="chart-filters" id="report-filters">
+            <button class="filter-btn active" data-range="week">Theo tuần</button>
+            <button class="filter-btn" data-range="month">Theo tháng</button>
+            <button class="filter-btn" data-range="year">Theo năm</button>
+          </div>
+        </div>
+        <div class="chart-placeholder" id="chart-container">
+          <div class="chart-tooltip" id="chart-tooltip"></div>
+          <svg class="chart-svg" id="report-svg" viewBox="0 0 800 250" preserveAspectRatio="none">
+            <line id="hover-line" class="chart-indicator" x1="0" y1="0" x2="0" y2="250" />
+            <g id="chart-groups"></g>
+          </svg>
+        </div>
+      </div>
+      <div class="table-card">
+        <table class="demo-table">
+          <thead><tr><th>#</th><th>Khu vực</th><th>Thiết bị</th><th>Công suất</th><th>Tiền điện</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const locationData = {
+  living: {
+    title: "Phòng tiếp khách",
+    scenarios: [
+      {title:"Giờ làm việc", desc:"Kích hoạt toàn bộ"}, 
+      {title:"Tiếp khách", desc:"Sang trọng"}, 
+      {title:"Nghỉ trưa", desc:"Tiết kiệm năng lượng"},
+      {title:"Presentation", desc:"Tối ưu máy chiếu"},
+      {title:"Movie Night", desc:"Đèn mờ, Rèm đóng"},
+      {title:"Romantic", desc:"Ánh sáng ấm"},
+      {title:"All Off", desc:"Tắt toàn bộ thiết bị"},
+      {title:"Morning Welcome", desc:"Mở rèm, Cafe"},
+      {title:"Cleaning Mode", desc:"Sáng tối đa"},
+      {title:"Party Mode", desc:"Đèn đổi màu"}
+    ],
+    ac: [{name:"AC Center 01", status:"24°C", on:true}, {name:"AC Center 02", status:"24°C", on:true}],
+    lights: [{name:"Logo Backlight", on:true}, {name:"Main LED", on:true}],
+    env: [{label:"Nhiệt độ", value:"26°C"}, {label:"Độ ẩm", value:"62%"}],
+    security: [{label:"Cảm biến hiện diện", value:"Phát hiện", color:"#FD3566"}, {label:"Cửa chính", value:"Đóng"}]
+  },
+  meeting: {
+    title: "Phòng họp lớn",
+    scenarios: [{title:"Thuyết trình", desc:"Đèn tối"}, {title:"Họp nội bộ", desc:"22°C"}],
+    ac: [{name:"AC Meeting", status:"22°C", on:true}],
+    lights: [{name:"Ceiling Light", on:false}, {name:"Wall Light", on:true}],
+    env: [{label:"Nhiệt độ", value:"22°C"}, {label:"Độ ẩm", value:"55%"}],
+    security: [{label:"Cửa họp", value:"Khóa"}]
+  },
+  rd: {
+    title: "Khu vực R&D",
+    scenarios: [{title:"Tập trung", desc:"Dịu nhẹ"}, {title:"Lab Test", desc:"Max power"}, {title:"Night Shift", desc:"Tiết kiệm"}, {title:"Deep Work", desc:"Không làm phiền"}],
+    ac: [
+      {name:"Lab AC 01", status:"20°C", on:true}, 
+      {name:"Lab AC 02", status:"22°C", on:false},
+      {name:"Server Rack Cooling", status:"18°C", on:true},
+      {name:"Ventilation System", status:"MAX", on:true}
+    ],
+    lights: [
+      {name:"Tech Desk Main", on:true}, 
+      {name:"Prototype Area", on:true}, 
+      {name:"Soldering Station", on:false},
+      {name:"3D Print Room", on:true},
+      {name:"Storage LED", on:false},
+      {name:"Emergency Light", on:true}
+    ],
+    env: [
+      {label:"Bụi (PM2.5)", value:"5μg/m3"},
+      {label:"Nhiệt độ Lab", value:"22.5°C"},
+      {label:"Độ ẩm", value:"45%"},
+      {label:"CO2 Level", value:"400ppm"},
+      {label:"Ánh sáng", value:"500 lux"}
+    ],
+    security: [
+      {label:"Thẻ từ", value:"Active"},
+      {label:"Camera Lab 01", value:"Recording", color:"#FD3566"},
+      {label:"Smoke Sensor", value:"Normal"},
+      {label:"Water Leak", value:"Safe"}
+    ]
+  },
+  warehouse: {
+    title: "Kho vận hành",
+    scenarios: [{title:"Nhập hàng", desc:"Cửa mở"}, {title:"An ninh đêm", desc:"Báo động"}],
+    ac: [{name:"Ventilation", status:"MAX", on:true}],
+    lights: [{name:"HighBay Lô A", on:true}],
+    env: [{label:"Nhiệt độ", value:"28°C"}],
+    security: [{label:"Cảm biến rung", value:"Safe"}]
+  },
+  exec: {
+    title: "Văn phòng điều hành",
+    scenarios: [{title:"Ký kết", desc:"Sáng rực"}, {title:"Private", desc:"Kính mờ"}],
+    ac: [{name:"VIP AC", status:"25°C", on:true}],
+    lights: [{name:"Director Desk", on:true}],
+    env: [{label:"Nhiệt độ", value:"25°C"}],
+    security: [{label:"Vân tay", value:"Đã chốt"}]
+  }
+};
+
+const chartData = {
+  week: {
+    labels: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+    power: [42, 58, 45, 62, 55, 78, 70],
+    cost: [125, 175, 135, 185, 165, 230, 210],
+    carbon: [16, 24, 18, 28, 22, 35, 30]
+  },
+  month: {
+    labels: Array.from({length: 30}, (_, i) => `Ngày ${i+1}`),
+    power: Array.from({length: 30}, (v, i) => Math.floor(45 + Math.sin(i/4)*12 + Math.random()*8)),
+    cost: Array.from({length: 30}, (v, i) => Math.floor(140 + Math.sin(i/4)*35 + Math.random()*20)),
+    carbon: Array.from({length: 30}, (v, i) => Math.floor(22 + Math.sin(i/4)*7 + Math.random()*5))
+  },
+  year: {
+    labels: ["Th1", "Th2", "Th3", "Th4", "Th5", "Th6", "Th7", "Th8", "Th9", "Th10", "Th11", "Th12"],
+    power: [1100, 1250, 1050, 1300, 1550, 1350, 1600, 1750, 1500, 1650, 1800, 2000],
+    cost: [3300, 3800, 3100, 4000, 4600, 4000, 4800, 5200, 4500, 4900, 5400, 6000],
+    carbon: [450, 520, 440, 580, 650, 570, 700, 780, 660, 730, 800, 900]
+  }
+};
+
+let toastTimer;
+function showToast(m) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-message').innerText = m;
+  clearTimeout(toastTimer);
+  t.classList.add('show');
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function updateDashboard(k) {
+  const d = locationData[k];
+  const p = document.getElementById('dashboard-content-panel');
+  if(!p) return;
+  p.classList.remove('animate-update'); void p.offsetWidth; p.classList.add('animate-update');
+  document.getElementById('current-location-title').innerText = d.title;
+  document.getElementById('scenarios-container').innerHTML = d.scenarios.map(s => `<div class="scenario-card" onclick="showToast('Kịch bản: ${s.title} đã kích hoạt!')"><h5>${s.title}</h5><p>${s.desc}</p><div class="dots">⋮</div></div>`).join('');
+  document.getElementById('ac-container').innerHTML = d.ac.map(a => `<div class="device-item"><span>${a.name}</span><div class="device-status">${a.status} <label class="switch"><input type="checkbox" ${a.on?'checked':''}><span class="slider"></span></label></div></div>`).join('');
+  document.getElementById('light-container').innerHTML = d.lights.map(l => `<div class="device-item"><span>${l.name}</span><label class="switch"><input type="checkbox" ${l.on?'checked':''}><span class="slider"></span></label></div>`).join('');
+  document.getElementById('sensor-env').innerHTML = d.env.map(e => `<div class="sensor-box"><span>${e.label}</span><strong>${e.value}</strong></div>`).join('');
+  document.getElementById('sensor-security').innerHTML = d.security.map(s => `<div class="sensor-box"><span>${s.label}</span><strong style="color:${s.color||'inherit'}">${s.value}</strong></div>`).join('');
+}
+
+function renderChart(range) {
+  const data = chartData[range];
+  const g = document.getElementById('chart-groups');
+  const svg = document.getElementById('report-svg');
+  if(!svg || !g) return;
+  const width = 800;
+  const height = 250;
+  
+  // Symmetrical margins for a clean, centered look
+  const mLeft = 20;
+  const mRight = 20;
+  const chartW = width - mLeft - mRight;
+
+  const getX = (i) => mLeft + (i / (data.labels.length - 1)) * chartW;
+  const maxVal = Math.max(...data.power, ...data.cost.map(v => v/4), ...data.carbon.map(v => v*1.8)) * 1.3;
+  const getY = (v, scale=1) => height - ((v * scale) / maxVal) * height;
+
+  let gridHtml = '';
+  // Draw horizontal grid lines only
+  for(let i=0; i<=5; i++) {
+    const y = height - (i / 5) * height;
+    gridHtml += `<line class="grid-line" x1="${mLeft}" y1="${y}" x2="${width - mRight}" y2="${y}" />`;
+  }
+
+  // Draw X-axis labels
+  for(let i=0; i<data.labels.length; i++) {
+    if(range === 'month' && i % 5 !== 0 && i !== 29) continue; 
+    const x = getX(i);
+    let dateLabel = "";
+    if(range === 'week') {
+      const d = new Date(2026, 3, 9 + i); 
+      dateLabel = `${d.getDate().toString().padStart(2, '0')}/04/2026`;
+    } else if(range === 'month') {
+      dateLabel = `${(i+1).toString().padStart(2, '0')}/04/2026`;
+    } else {
+      dateLabel = data.labels[i] + "/2026";
+    }
+    const anchor = (i === 0) ? "start" : (i === data.labels.length - 1 ? "end" : "middle");
+    gridHtml += `<text class="axis-label" x="${x}" y="${height + 25}" text-anchor="${anchor}">${dateLabel}</text>`;
+  }
+
+  const solve = (arr, scale=1) => {
+    const points = arr.map((v, i) => ({x: getX(i), y: getY(v, scale)}));
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[i], p1 = points[i+1];
+      const cpX = p0.x + (p1.x - p0.x) / 2;
+      d += ` C ${cpX} ${p0.y}, ${cpX} ${p1.y}, ${p1.x} ${p1.y}`;
+    }
+    return d;
+  };
+
+  const dPower = solve(data.power, 1);
+  const dCost = solve(data.cost, 1/4); 
+  const dCarbon = solve(data.carbon, 1.8);
+
+  g.innerHTML = gridHtml + `
+    <path class="chart-line" d="${dPower}" stroke="#10b981" fill="none" />
+    <path class="chart-line" d="${dCost}" stroke="#FD3566" fill="none" />
+    <path class="chart-line" d="${dCarbon}" stroke="#f59e0b" fill="none" />
+  `;
+
+  svg.onmousemove = (e) => {
+    const rect = svg.getBoundingClientRect();
+    const mouseX = (e.clientX - rect.left) / rect.width * width;
+    let index = Math.round((mouseX - mLeft) / chartW * (data.labels.length - 1));
+    index = Math.max(0, Math.min(data.labels.length - 1, index));
+    
+    const snapX = getX(index);
+    const yVal = getY(data.cost[index], 1/4);
+    const displayY = (yVal / height) * rect.height;
+
+    const line = document.getElementById('hover-line');
+    line.setAttribute('x1', snapX); line.setAttribute('x2', snapX); 
+    line.setAttribute('y2', height);
+    line.style.display = 'block';
+
+    const tooltip = document.getElementById('chart-tooltip');
+    tooltip.style.display = 'block';
+    tooltip.style.left = (snapX / width * rect.width) + 'px';
+    tooltip.style.top = displayY + 'px';
+    
+    const dayNames = ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
+    let dayName = "";
+    let dateStr = "";
+    if(range === 'week') {
+      const d = new Date(2026, 3, 9 + index);
+      dayName = dayNames[d.getDay()];
+      dateStr = `${d.getDate().toString().padStart(2, '0')}/04/2026`;
+    } else if(range === 'month') {
+      const d = new Date(2026, 3, index + 1);
+      dayName = dayNames[d.getDay()];
+      dateStr = `${(index + 1).toString().padStart(2, '0')}/04/2026`;
+    } else {
+      dateStr = data.labels[index] + "/2026";
+    }
+
+    tooltip.innerHTML = `
+      <div class="tooltip-date">${dayName ? dayName + ' - ' : ''}${dateStr}</div>
+      <div class="tooltip-row"><span><span class="tooltip-dot" style="background:#10b981"></span>Điện năng</span><strong>${data.power[index]} kWh</strong></div>
+      <div class="tooltip-row"><span><span class="tooltip-dot" style="background:#FD3566"></span>Chi phí</span><strong>${data.cost[index].toLocaleString()} đ</strong></div>
+      <div class="tooltip-row"><span><span class="tooltip-dot" style="background:#f59e0b"></span>Carbon</span><strong>${data.carbon[index]} ppm</strong></div>
+    `;
+  };
+
+  svg.onmouseleave = () => {
+    document.getElementById('hover-line').style.display = 'none';
+    document.getElementById('chart-tooltip').style.display = 'none';
+  };
+
+  const tbody = document.querySelector('.demo-table tbody');
+  if(tbody) {
+    tbody.innerHTML = Object.keys(locationData).map((key, index) => {
+      const loc = locationData[key];
+      const p = Math.round(20 + Math.random() * 50);
+      return `<tr><td>${index + 1}</td><td>${loc.title}</td><td>${loc.lights.length + loc.ac.length}</td><td>${p}kWh</td><td>${(p * 3500).toLocaleString()}đ</td></tr>`;
+    }).join('');
+  }
+}
+
+document.getElementById('report-filters').onclick = (e) => {
+  if(e.target.classList.contains('filter-btn')) {
+    document.querySelectorAll('#report-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderChart(e.target.dataset.range);
+  }
+};
+
+const tabs = document.querySelectorAll('.nav-item');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const isReport = tab.id === 'tab-report';
+    document.getElementById('view-dashboard').style.display = isReport ? 'none' : 'block';
+    document.getElementById('view-report').style.display = isReport ? 'block' : 'none';
+    
+    if (isReport) {
+      document.getElementById('current-location-title').innerText = "Báo cáo điện năng";
+      document.getElementById('header-status').innerText = "Cập nhật lúc: 18:00";
+      renderChart(document.querySelector('#report-filters .active').dataset.range);
+    } else {
+      const activeLoc = document.querySelector('.location-item.active').dataset.location;
+      document.getElementById('current-location-title').innerText = locationData[activeLoc].title;
+      document.getElementById('header-status').innerText = "Đang kết nối (WILE 3.0)";
+    }
+  });
+});
+
+document.getElementById('location-list').addEventListener('click', (e) => {
+  const item = e.target.closest('.location-item');
+  if(item) {
+    document.querySelectorAll('.location-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    updateDashboard(item.dataset.location);
+  }
+});
+
+updateDashboard('living');
+
+function handleLogin() {
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-pass').value;
+  const terms = document.getElementById('terms').checked;
+  
+  if(!email || !pass) {
+    alert('Vui lòng nhập đầy đủ email và mật khẩu!');
+    return;
+  }
+  if(!terms) {
+    alert('Vui lòng đồng ý với các điều khoản!');
+    return;
+  }
+  
+  document.getElementById('view-login').style.display = 'none';
+  document.getElementById('app-container').style.display = 'flex';
+  showToast('Đăng nhập thành công!');
+}
+</script>
+</body>
+</html>

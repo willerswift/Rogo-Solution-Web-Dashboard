@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Liên hệ - Rogo Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Custom CSS for Contact Page */
+.contact-hero {
+  padding: 160px 0 100px;
+  background: linear-gradient(rgba(19, 10, 47, 0.7), rgba(19, 10, 47, 0.7)), url('assets/Background2.png') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  text-align: left;
+}
+.contact-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+.contact-hero h1 span { color: #FD3566; }
+.contact-hero .subtitle { font-size: 20px; font-weight: 700; color: #FD3566; margin-bottom: 24px; }
+.contact-hero p { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 600px; line-height: 1.6; }
+
+.contact-main { padding: 100px 0; background: #fff; }
+.contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: start; }
+
+.contact-form-box h2 { font-size: 32px; font-weight: 800; margin-bottom: 40px; color: var(--text); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+.form-group input:focus { border-color: #FD3566; outline: none; }
+.form-full { grid-column: span 2; }
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: #FD3566;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.3s;
+}
+.btn-submit:hover { background: #E62E5A; }
+
+.contact-info-box h3 { font-size: 24px; font-weight: 800; margin-bottom: 32px; color: var(--text); }
+.info-list { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+.info-item { display: flex; gap: 16px; align-items: center; }
+.info-icon { 
+  width: 48px; height: 48px; background: #FFE4EA; border-radius: 12px; 
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: #FD3566;
+}
+.info-text { flex: 1; }
+.info-text h5 { font-size: 16px; font-weight: 800; margin: 0 0 2px 0; color: var(--text); line-height: 1.2; }
+.info-text p { font-size: 14px; color: var(--text-muted); margin: 0; line-height: 1.4; }
+.info-map { width: 100%; height: 240px; border-radius: 12px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+.faq-section { padding: 100px 0; background: #f8fafc; text-align: center; }
+.faq-section .badge { color: #FD3566; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 16px; display: block; }
+.faq-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 48px; color: var(--text); }
+.faq-container { max-width: 800px; margin: 0 auto; text-align: left; }
+.faq-item { background: #fff; border-radius: 8px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+.faq-item summary { padding: 20px 24px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; color: var(--text); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 20px; color: #FD3566; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-content { padding: 0 24px 20px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+.contact-cta { 
+  padding: 120px 0; 
+  background: url('assets/Background1.png') no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+}
+.cta-glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  padding: 60px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.cta-glass h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; }
+.cta-glass p { margin-bottom: 32px; opacity: 0.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; }
+.cta-btns .btn-primary { background: #FD3566; border: none; padding: 12px 32px; border-radius: 30px; font-weight: 700; color: #fff; cursor: pointer; }
+.cta-btns .btn-ghost { background: transparent; border: 1px solid #fff; padding: 12px 32px; border-radius: 30px; font-weight: 700; color: #fff; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-full { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="main-nav">
+  <div class="container nav-inner">
+    <a class="logo" href="index.html" id="logo-link">
+      <img src="assets/Logo%20vector.png" alt="Rogo Solutions Logo" class="logo-img">
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" id="nav-home">Trang chủ</a></li>
+        <li><a href="about.html" id="nav-about">Về Rogo</a></li>
+        <li class="has-dropdown">
+          <a href="solutions.html" id="nav-solutions">Các giải pháp <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <ul class="dropdown" id="solutions-dropdown">
+            <li><a href="solutions.html#rogo-platform">Rogo Platform (PaaS)</a></li>
+            <li><a href="solutions.html#enterprise-saas">IoT Enterprise SaaS</a></li>
+            <li><a href="solutions.html#neo-one">Thing Edges - NEO One</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html" class="active" id="nav-contact">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <a href="#contact-form" class="nav-cta" id="nav-cta-btn" style="text-decoration:none;">Tư vấn giải pháp</a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <div class="container">
+    <h1>Liên hệ với <span>Rogo</span></h1>
+    <div class="subtitle">Phần cứng. Phần mềm. Cloud. Sẵn sàng triển khai.</div>
+    <p>Chúng tôi sẵn sàng tư vấn giải pháp IoT phù hợp với bài toán của bạn. Hãy kết nối để cùng bứt phá giới hạn công nghệ.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTACT -->
+<section class="contact-main">
+  <div class="container contact-grid">
+    <!-- Form -->
+    <div class="contact-form-box" id="contact-form">
+      <h2>Nhận tư vấn giải pháp IoT</h2>
+      <form action="#">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Họ tên</label>
+            <input type="text" placeholder="Nguyễn Văn A">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="contact@example.com">
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại</label>
+            <input type="tel" placeholder="0901 234 567">
+          </div>
+          <div class="form-group">
+            <label>Doanh nghiệp</label>
+            <input type="text" placeholder="Tên công ty của bạn">
+          </div>
+          <div class="form-group form-full">
+            <label>Bạn quan tâm đến...</label>
+            <select>
+              <option>NEO One Hub</option>
+              <option>Rogo Platform (PaaS)</option>
+              <option>IoT Enterprise SaaS</option>
+              <option>Khác</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label>Mô tả nhu cầu</label>
+            <textarea rows="4" placeholder="Chia sẻ thêm về dự án hoặc câu hỏi của bạn..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Gửi yêu cầu tư vấn</button>
+      </form>
+    </div>
+
+    <!-- Info -->
+    <div class="contact-info-box">
+      <h3>Thông tin liên hệ</h3>
+      <div class="info-list">
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="info-text">
+            <h5>Địa chỉ Trụ sở</h5>
+            <p>Số 8 Đường Số 52, Phường An Phú, TP. Thủ Đức, TP.HCM</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="info-text">
+            <h5>Email hỗ trợ</h5>
+            <p>contact@rogosolutions.vn</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="info-text">
+            <h5>Hotline</h5>
+            <p>(+84) 312 1234 5678</p>
+          </div>
+        </div>
+      </div>
+      <img src="assets/Container4.jpg" alt="Vị trí Rogo trên bản đồ" class="info-map">
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <div class="container">
+    <span class="badge">Hỗ trợ khách hàng</span>
+    <h2>Câu hỏi thường gặp</h2>
+    <div class="faq-container">
+      <details class="faq-item">
+        <summary>Rogo Solutions cung cấp những giải pháp gì?</summary>
+        <div class="faq-content">Chúng tôi cung cấp hệ sinh thái IoT toàn diện bao gồm phần cứng Hub NEO One, nền tảng PaaS cho doanh nghiệp và các giải pháp SaaS chuyên biệt cho từng ngành nghề.</div>
+      </details>
+      <details class="faq-item">
+        <summary>NEO One Hub hoạt động như thế nào?</summary>
+        <div class="faq-content">NEO One Hub đóng vai trò là bộ não trung tâm, kết nối các thiết bị sử dụng giao thức Zigbee, Bluetooth, WiFi và Matter, cho phép điều khiển tập trung qua app Thing Edges.</div>
+      </details>
+      <details class="faq-item">
+        <summary>IoT SaaS sắp ra mắt dành cho ai?</summary>
+        <div class="faq-content">Giải pháp SaaS của Rogo được thiết kế tối ưu cho các doanh nghiệp trong lĩnh vực dịch vụ (khách sạn, chuỗi cửa hàng), nông nghiệp công nghệ cao và sản xuất công nghiệp.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Thing Edges khác gì các app smart home khác?</summary>
+        <div class="faq-content">Thing Edges tập trung vào khả năng tùy biến cao cho doanh nghiệp, bảo mật đa lớp và hạ tầng Cloud đặt tại Việt Nam cho độ trễ cực thấp.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Chi phí triển khai giải pháp IoT cho doanh nghiệp là bao nhiêu?</summary>
+        <div class="faq-content">Chi phí sẽ phụ thuộc vào quy mô dự án và nhu cầu cụ thể của doanh nghiệp. Vui lòng để lại thông tin tư vấn để đội ngũ chuyên gia của chúng tôi báo giá chi tiết.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="contact-cta">
+  <div class="container">
+    <div class="cta-glass">
+      <h2>Sẵn sàng đưa IoT vào vận hành?</h2>
+      <p>Tham gia cùng các doanh nghiệp hàng đầu Việt Nam đang mở rộng quy mô vận hành với Rogo Solutions.</p>
+      <div class="cta-btns">
+        <a href="demo.html" target="_blank" class="btn btn-primary" style="text-decoration:none;">Đăng ký demo</a>
+        <a href="#contact-form" class="btn-ghost" style="text-decoration:none;">Liên hệ tư vấn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="main-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="index.html" id="footer-logo">
+          <img src="assets/Logo%20vector.png" alt="Rogo Solutions Logo" class="logo-img">
+        </a>
+        <div class="foot-tagline">Make your life smart</div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>OVERVIEW</h5>
+          <a href="#">Desktop app</a>
+          <a href="#">Mobile app</a>
+          <a href="#">Plans</a>
+          <a href="#">Security</a>
+          <a href="#">Features</a>
+        </div>
+        <div class="foot-col">
+          <h5>PRODUCTS</h5>
+          <a href="#">Plus</a>
+          <a href="#">Professional</a>
+          <a href="#">Business</a>
+          <a href="#">Enterprise</a>
+        </div>
+        <div class="foot-col">
+          <h5>COMPANY</h5>
+          <a href="#">About us</a>
+          <a href="#">Jobs</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="foot-col">
+          <h5>LIÊN LẠC</h5>
+          <a href="#">Facebook</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Rogo Solutions. Bảo lưu mọi quyền.</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

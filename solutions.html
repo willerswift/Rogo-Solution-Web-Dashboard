@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Các giải pháp - Rogo Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Custom CSS for Solutions Page */
+.sol-hero {
+  padding: 160px 0 100px;
+  background: url('assets/Background3.png') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  text-align: left;
+}
+.sol-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; color: #fff; }
+.sol-hero .subtitle { font-size: 24px; font-weight: 700; color: #FD3566; margin-bottom: 24px; }
+.sol-hero p { font-size: 16px; color: rgba(255,255,255,.7); line-height: 1.6; max-width: 700px; }
+
+.sol-hub { padding: 120px 0; background: #fff; color: var(--text); }
+.hub-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.hub-text .badge-eyebrow { 
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid rgba(233,48,73,0.3);
+  border-radius: 20px;
+  color: #FD3566;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.hub-text h2 { font-size: 44px; font-weight: 800; margin-bottom: 24px; line-height: 1.2; color: #1e293b; }
+.hub-text p.desc { font-size: 16px; color: #64748b; line-height: 1.7; margin-bottom: 48px; }
+.hub-features { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+.hub-feat-item { display: flex; gap: 16px; align-items: flex-start; }
+.hub-feat-icon { width: 24px; height: 24px; color: #10b981; flex-shrink: 0; }
+.hub-feat-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #1e293b; }
+.hub-feat-item p { font-size: 14px; margin: 0; line-height: 1.4; color: #64748b; }
+
+.hub-icons-row { display: flex; gap: 32px; margin-bottom: 48px; align-items: center; }
+.hub-icon-box { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #64748b; font-size: 12px; }
+.hub-icon-box svg { width: 24px; height: 24px; }
+
+.btn-pill { 
+  padding: 14px 36px; 
+  border-radius: 30px; 
+  background: #FD3566; 
+  color: #fff; 
+  border: none; 
+  font-weight: 700; 
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-pill:hover { background: #d91642; transform: translateY(-2px); }
+.hub-img img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+.sol-platform { padding: 120px 0; background: #161528; color: #fff; }
+.plat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.plat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.plat-card { 
+  background: rgba(255,255,255,0.03); 
+  padding: 32px; 
+  border-radius: 16px; 
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.plat-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+.plat-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; margin: 0; }
+.plat-card .icon-box { 
+  width: 32px; height: 32px; border-radius: 8px; 
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+
+.plat-text .badge-eyebrow {
+  display: inline-block;
+  padding: 4px 16px;
+  border: 1px solid #10b981;
+  border-radius: 20px;
+  color: #10b981;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.plat-text h2 { font-size: 36px; font-weight: 800; margin-bottom: 24px; line-height: 1.2; color: #fff; }
+.plat-text p.desc { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.7; margin-bottom: 40px; }
+
+.plat-actions { display: flex; gap: 16px; align-items: center; }
+.plat-btn {
+  background: #FD3566;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-ghost-dark {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* App UI Card */
+.plat-card-img { padding: 0; background: transparent; border: none; align-items: center; display: flex; justify-content: center; background: #1b1b3a; border-radius: 12px; overflow: hidden; }
+.plat-card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.sol-app { padding: 80px 0 20px; background: #f8fafc; }
+.app-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.app-text h2 { font-size: 36px; font-weight: 800; margin-bottom: 24px; }
+.app-text p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; }
+.app-badges { display: flex; gap: 16px; }
+.app-badges img { height: 40px; }
+.app-img img { width: 100%; }
+
+.iot-sectors .badge-eyebrow {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid rgba(233,48,73,0.3);
+  border-radius: 20px;
+  color: #FD3566;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.iot-sectors { padding: 40px 0 60px; background: #fff; }
+.iot-grid { 
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 32px !important;
+  max-width: 1300px !important;
+  margin: 0 auto !important;
+}
+.iot-card { 
+  width: 100% !important;
+  border-radius: 24px !important; 
+  overflow: hidden !important; 
+  box-shadow: 0 15px 45px rgba(0,0,0,0.08) !important;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  background: #f8fafc !important;
+  position: relative !important;
+  height: auto !important; /* Allow natural height */
+}
+.iot-card:hover { 
+  transform: translateY(-8px) scale(1.01) !important; 
+  box-shadow: 0 25px 55px rgba(0,0,0,0.12) !important;
+}
+.iot-card img { 
+  width: 100% !important; 
+  height: auto !important; /* Don't force height to 100% to avoid cropping text */
+  display: block !important; 
+}
+
+.iot-card:nth-child(1), .iot-card:nth-child(2), .iot-card:nth-child(3) { 
+  grid-column: span 2 !important; 
+}
+.iot-card:nth-child(4), .iot-card:nth-child(5) { 
+  grid-column: span 3 !important; 
+}
+
+.sol-cta { 
+  padding: 120px 0; 
+  background: url('assets/Background1.png') no-repeat center center;
+  background-size: cover;
+  color: #fff; 
+  text-align: center; 
+}
+.sol-cta h2 { font-size: 40px; font-weight: 800; margin-bottom: 24px; }
+.sol-cta p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+.sol-cta .btn-primary { background: #FD3566; border: none; padding: 14px 36px; border-radius: 30px; font-weight: 700; }
+
+@media (max-width: 900px) {
+  .hub-grid, .plat-grid, .app-grid { grid-template-columns: 1fr; gap: 40px; }
+  .iot-grid { grid-template-columns: 1fr; }
+  .iot-card { grid-column: span 1 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="main-nav">
+  <div class="container nav-inner">
+    <a class="logo" href="index.html" id="logo-link">
+      <img src="assets/Logo%20vector.png" alt="Rogo Solutions Logo" class="logo-img">
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" id="nav-home">Trang chủ</a></li>
+        <li><a href="about.html" id="nav-about">Về Rogo</a></li>
+        <li class="has-dropdown">
+          <a href="solutions.html" class="active" id="nav-solutions">Các giải pháp <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <ul class="dropdown" id="solutions-dropdown">
+            <li><a href="solutions.html#rogo-platform">Rogo Platform (PaaS)</a></li>
+            <li><a href="solutions.html#enterprise-saas">IoT Enterprise SaaS</a></li>
+            <li><a href="solutions.html#neo-one">Thing Edges - NEO One</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html" id="nav-contact">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <a href="contact.html#contact-form" class="nav-cta" id="nav-cta-btn" style="text-decoration:none;">Tư vấn giải pháp</a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="sol-hero">
+  <div class="container">
+    <h1>Các giải pháp của Rogo</h1>
+    <div class="subtitle" style="color:#FD3566">Phần cứng. Phần mềm. Cloud. Sẵn sàng triển khai.</div>
+    <p>Mỗi sản phẩm Rogo đều vận hành trên cùng hạ tầng cloud tại Việt Nam, được thiết kế để phục vụ mọi quy mô — chuyên nghiệp, chuỗi giải pháp cho Home, Shop, &amp; Smart Office.</p>
+  </div>
+</section>
+
+<!-- HUB SECTION -->
+<section class="sol-hub" id="neo-one">
+  <div class="container hub-grid">
+    <div class="hub-text">
+      <span class="badge-eyebrow">Phần cứng IoT</span>
+      <h2>Một hub — nhiều giao thức — trung tâm cho mọi giải pháp IoT</h2>
+      <p class="desc">Bộ điều khiển trung tâm thế hệ mới tích hợp đa giao thức kết nối, cho phép quản lý hàng ngàn thiết bị từ các thương hiệu khác nhau trong một hệ thống duy nhất.</p>
+      
+      <div class="hub-features">
+        <div class="hub-feat-item">
+          <svg class="hub-feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <h4>Đa giao thức</h4>
+            <p>WiFi, BLE Mesh, Zigbee 3.0</p>
+          </div>
+        </div>
+        <div class="hub-feat-item">
+          <svg class="hub-feat-icon" style="color:#10b981" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div>
+            <h4>Triển khai nhanh</h4>
+            <p>Cài đặt chỉ trong vài phút</p>
+          </div>
+        </div>
+        <div class="hub-feat-item">
+          <svg class="hub-feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          <div>
+            <h4>Linh hoạt quy mô</h4>
+            <p>Từ hộ gia đình đến nhà máy</p>
+          </div>
+        </div>
+        <div class="hub-feat-item">
+          <svg class="hub-feat-icon" style="color:#3b82f6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <div>
+            <h4>Cloud tích hợp</h4>
+            <p>Đồng bộ dữ liệu thời gian thực</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hub-icons-row">
+        <div class="hub-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          <span>WiFi</span>
+        </div>
+        <div class="hub-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>BLE Mesh</span>
+        </div>
+        <div class="hub-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span>Zigbee</span>
+        </div>
+      </div>
+      
+      <a href="https://thingedges.com/" target="_blank" class="btn-pill" style="text-decoration:none; display:inline-block;">Mua NEO One</a>
+    </div>
+    <div class="hub-img">
+       <img src="assets/NEO One Hub.png" alt="Rogo Hub NEO One">
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SECTION -->
+<section class="sol-platform" id="enterprise-saas">
+  <div class="container plat-grid">
+    <div class="plat-cards">
+      <div class="plat-card">
+        <div class="icon-box" style="background:rgba(233,48,73,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E93049" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Dịch vụ</h3>
+        <p>Quản lý chuỗi cửa hàng, khách sạn</p>
+      </div>
+      <div class="plat-card">
+        <div class="icon-box" style="background:rgba(16,185,129,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Nông nghiệp</h3>
+        <p>Giám sát môi trường & tưới tiêu</p>
+      </div>
+      <div class="plat-card">
+        <div class="icon-box" style="background:rgba(59,130,246,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>Sản xuất</h3>
+        <p>Tối ưu hóa dây chuyền thiết bị</p>
+      </div>
+      <div class="plat-card-img">
+         <img src="assets/ThingFlow.png" alt="ThingFlow App UI">
+      </div>
+    </div>
+    <div class="plat-text">
+       <span class="badge-eyebrow">Sắp ra mắt</span>
+       <h2>Từ hub IoT đến giải pháp nghiệp vụ — tất cả trên một nền tảng SaaS</h2>
+       <p class="desc">Phần mềm quản trị chuyên sâu cho từng ngành nghề, giúp chuyển đổi dữ liệu thô từ cảm biến thành các quyết định kinh doanh chính xác.</p>
+       <div class="plat-actions">
+         <button class="plat-btn">Đăng ký nhận thông tin</button>
+         <a href="#" class="btn-ghost-dark">Liên hệ nhận tư vấn sớm</a>
+       </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP SECTION -->
+<section class="sol-app" id="rogo-platform">
+  <div class="container app-grid">
+    <div class="app-text">
+      <h2 style="font-size:36px; font-weight:800; margin-bottom:24px; line-height:1.3;">Một app duy nhất — kết nối thiết bị thông minh từ mọi thương hiệu</h2>
+      <p style="font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:32px;">Thing Edges - ứng dụng di động mạnh mẽ giúp điều khiển và giám sát toàn bộ hệ thống IoT của bạn một cách dễ dàng, mọi lúc mọi nơi. Tích hợp sâu với các trợ lý ảo hàng đầu thế giới.</p>
+      
+      <div style="background:#fff; padding:24px; border-radius:12px; margin-bottom:32px; border:1px solid #e2e8f0; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:var(--pink);"></div>
+        <h4 style="margin-bottom:8px; font-size:14px; color:var(--text);">Trợ giúp khi cài đặt Thing Edges</h4>
+        <p style="font-size:13px; margin:0; color:var(--text-muted);">Chúng tôi cung cấp tài liệu hướng dẫn chi tiết và đội ngũ hỗ trợ kỹ thuật 24/7 để bạn bắt đầu dễ dàng nhất.</p>
+      </div>
+      
+      <div class="app-badges" style="display:flex; gap:16px;">
+        <a href="https://apps.apple.com/vn/app/thing-edges/id6502507735?l=vi" target="_blank" class="btn btn-primary" style="background:#FD3566; text-decoration:none; display:inline-flex; align-items:center;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right:8px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-4h2v4zm0-6h-2V7h2v3z"/></svg> 
+          Tải về Thing Edges
+        </a>
+        <button class="btn btn-ghost" style="border: 1px solid var(--gray-300);">Tài liệu hỗ trợ</button>
+      </div>
+    </div>
+    <div class="app-img">
+       <img src="assets/Thing Edges app.png" alt="Thing Edges App Mobile" style="width:100%; transform: rotate(-5deg) translateY(20px);">
+    </div>
+  </div>
+</section>
+
+<!-- IOT SECTORS -->
+<section class="iot-sectors">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="badge-eyebrow" style="margin-bottom:8px;">Ứng dụng thực tế</span>
+      <p style="color:var(--text-muted); font-size:15px; margin-top:0;">Phạm vi ứng dụng của Rogo vô cùng rộng lớn, từ cá nhân đến các quy mô công nghiệp lớn.</p>
+    </div>
+    <div class="iot-grid">
+      <div class="iot-card"><img src="assets/Card 1.png" alt="Nhà thông minh"></div>
+      <div class="iot-card"><img src="assets/Card 2.png" alt="Chuỗi dịch vụ"></div>
+      <div class="iot-card"><img src="assets/Card 3.png" alt="Nông nghiệp thông minh"></div>
+      <div class="iot-card"><img src="assets/Card 4.png" alt="Sản xuất"></div>
+      <div class="iot-card"><img src="assets/Card 5.png" alt="Tòa nhà & BMS"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sol-cta">
+  <div class="container">
+    <h2>Bạn vẫn phân vân giải pháp nào phù hợp?</h2>
+    <p>Để lại thông tin, đội ngũ chuyên gia của Rogo sẽ liên hệ và tư vấn giải pháp tối ưu nhất cho doanh nghiệp của bạn.</p>
+    <a href="contact.html#contact-form" class="btn btn-primary" style="background:#FD3566; text-decoration:none;">Đăng ký tư vấn miễn phí</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="main-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="index.html" id="footer-logo">
+          <img src="assets/Logo%20vector.png" alt="Rogo Solutions Logo" class="logo-img">
+        </a>
+        <div class="foot-tagline">Make your life smart</div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>OVERVIEW</h5>
+          <a href="#">Desktop app</a>
+          <a href="#">Mobile app</a>
+          <a href="#">Plans</a>
+          <a href="#">Security</a>
+          <a href="#">Features</a>
+        </div>
+        <div class="foot-col">
+          <h5>PRODUCTS</h5>
+          <a href="#">Plus</a>
+          <a href="#">Professional</a>
+          <a href="#">Business</a>
+          <a href="#">Enterprise</a>
+        </div>
+        <div class="foot-col">
+          <h5>COMPANY</h5>
+          <a href="#">About us</a>
+          <a href="#">Jobs</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="foot-col">
+          <h5>LIÊN LẠC</h5>
+          <a href="#">Facebook</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Rogo Solutions. Bảo lưu mọi quyền.</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
