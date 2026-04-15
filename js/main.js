@@ -39,13 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const isOpen = navLinks.classList.toggle('nav-open');
     hamburger.setAttribute('aria-expanded', isOpen);
     hamburger.classList.toggle('active', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : ''; // Prevent scroll when menu open
+  });
+
+  /* ── Mobile dropdown toggle ── */
+  document.querySelectorAll('.has-dropdown > a').forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 900) {
+        e.preventDefault();
+        toggle.parentElement.classList.toggle('active');
+      }
+    });
   });
 
   /* ── Close mobile menu on link click ── */
-  navLinks?.querySelectorAll('a').forEach(a => {
+  navLinks?.querySelectorAll('a:not(.has-dropdown > a)').forEach(a => {
     a.addEventListener('click', () => {
       navLinks.classList.remove('nav-open');
       hamburger?.classList.remove('active');
+      document.body.style.overflow = '';
     });
   });
 
