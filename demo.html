@@ -111,7 +111,7 @@ body, html { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif
 /* SIDEBAR */
 .sidebar { width: 70px; background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
 .logo-box { width: 40px; height: 40px; background: transparent; display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
-.logo-box img { width: 30px; filter: brightness(0) invert(1); }
+.logo-box img { width: 22px; filter: none !important; }
 .nav-item { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-bottom: 16px; cursor: pointer; color: var(--text-muted); transition: all 0.2s; }
 .nav-item.active { background: rgba(253, 53, 102, 0.1); color: var(--primary); }
 .nav-item:hover:not(.active) { background: rgba(255, 255, 255, 0.05); color: #fff; }
@@ -209,7 +209,8 @@ body, html { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif
 
 .chart-placeholder { height: 340px; width: 100%; position: relative; padding: 20px 0 60px 0; }
 .chart-svg { width: 100%; height: 100%; overflow: visible; cursor: crosshair; }
-.chart-line { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); fill: none; stroke-width: 3; stroke-linecap: round; }
+.chart-line { transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); fill: none; stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.chart-area { transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.15; }
 
 /* Trục và lưới */
 .axis-label { font-size: 9px; fill: #9CA3AF; font-weight: 500; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -267,6 +268,72 @@ input:checked + .slider:before { transform: translateX(14px); }
 .scenarios-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 .scenarios-grid::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
+/* LIGHT MODAL STYLES DARK MODE */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 3000; backdrop-filter: blur(8px); }
+.modal-content { background: #14142F; width: 900px; max-width: 95%; border-radius: 16px; display: flex; overflow: hidden; animation: modalIn 0.3s ease-out; box-shadow: 0 24px 60px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); }
+@keyframes modalIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.modal-left { width: 60%; padding: 40px; color: #fff; display: flex; flex-direction: column; background: #14142F; justify-content: center; }
+.modal-left h3 { margin: 0; font-size: 22px; font-weight: 700; color: #fff; }
+.modal-left .subtitle { font-size: 13px; color: #9CA3AF; margin-top: 4px; margin-bottom: 30px; }
+.power-status-row { display: flex; gap: 16px; margin-bottom: 32px; }
+.btn-power-toggle { width: 80px; height: 60px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: rgba(255,255,255,0.03); transition: all 0.2s; }
+.btn-power-toggle.active { border-color: var(--primary); background: rgba(253, 53, 102, 0.1); }
+.blue-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.blue-switch input { opacity: 0; width: 0; height: 0; }
+.blue-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #374151; transition: .3s; border-radius: 24px; }
+.blue-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+input:checked + .blue-slider { background-color: var(--primary); }
+input:checked + .blue-slider:before { transform: translateX(20px); }
+.status-bar-large { flex: 1; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 20px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 20px; font-weight: 700; color: #9CA3AF; background: rgba(255,255,255,0.03); }
+.status-bar-large svg { color: #4B5563; }
+.status-bar-large.active { color: #fff; }
+.status-bar-large.active svg { color: var(--primary); }
+.control-label { font-size: 14px; font-weight: 600; color: #9CA3AF; margin-bottom: 12px; display: block; }
+.brightness-btns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 32px; }
+.btn-percent { padding: 12px; border: 1px solid transparent; background: rgba(255,255,255,0.05); border-radius: 6px; font-size: 14px; font-weight: 600; color: #9CA3AF; cursor: pointer; transition: all 0.2s; text-align: center; }
+.btn-percent:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.btn-percent.active { border-color: var(--primary); background: rgba(253, 53, 102, 0.1); color: #fff; }
+.temp-slider-wrapper { display: flex; align-items: center; gap: 16px; }
+.temp-input-range { flex: 1; -webkit-appearance: none; height: 6px; background: linear-gradient(to right, #FF4D00, #FFB800, #FFFFFF, #00B2FF, #0057FF); border-radius: 10px; outline: none; }
+.temp-input-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; background: #E5E7EB; border-radius: 50%; cursor: pointer; border: 3px solid #1F2937; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.temp-val-box { width: 80px; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px; text-align: center; font-size: 14px; font-weight: 700; color: #fff; border: 1px solid rgba(255,255,255,0.05); }
+.modal-right { width: 40%; background: linear-gradient(160deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(0, 0, 0, 0.1) 100%), #0F0F23; padding: 40px 32px 32px 32px; display: flex; align-items: flex-start; justify-content: center; color: #fff; position: relative; border-left: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%); overflow: hidden; box-shadow: inset 0 0 40px rgba(255,255,255,0.02); }
+.modal-right-content { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0; }
+.close-modal-x { position: absolute; top: 16px; right: 16px; color: #FD3566; background: rgba(253, 53, 102, 0.1); border: none; width: 32px; height: 32px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+.modal-right h4 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #E2E8F0; text-align: center; }
+.bulb-display-container { position: relative; width: 100%; height: 230px; margin: 0; display: flex; justify-content: center; align-items: flex-start; }
+#bulb-glow { position: absolute; top: 70px; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; border-radius: 50%; filter: blur(50px); opacity: 0; transition: all 0.4s; z-index: 1; }
+#bulb-brightness-img { position: absolute !important; top: 70px !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: 250px !important; height: 250px !important; z-index: 4 !important; transition: all 0.4s !important; opacity: 0; pointer-events: none !important; object-fit: contain !important; mix-blend-mode: screen; }
+#bulb-preview-img { position: relative !important; top: 0 !important; width: auto !important; height: 210px !important; z-index: 3 !important; transition: all 0.4s !important; object-fit: contain !important; display: block !important; margin: 0 auto !important; }
+.summary-items { width: 100%; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; margin-top: 16px; }
+.summary-item { display: flex; justify-content: center; gap: 10px; align-items: center; font-size: 13px; }
+.summary-item span:first-child { color: #9CA3AF; }
+.summary-item .val { color: #FD3566; font-weight: 700; font-size: 15px; }
+
+/* AC MODAL STYLES */
+.ac-modal-content { background: #14142F; width: 550px; max-width: 95%; border-radius: 16px; padding: 32px; animation: modalIn 0.3s ease-out; border: 1px solid rgba(255,255,255,0.08); position: relative; color: #fff; }
+.ac-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.ac-header h3 { margin: 0; font-size: 22px; font-weight: 700; }
+.ac-header p { margin: 4px 0 0; font-size: 13px; color: #9CA3AF; }
+.temp-control-row { display: flex; gap: 16px; margin-bottom: 24px; align-items: stretch; }
+.ac-power-box { width: 80px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); cursor: pointer; transition: 0.2s; }
+.ac-power-box.active { border-color: var(--primary); background: rgba(253, 53, 102, 0.1); }
+.temp-display-box { flex: 1; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.btn-temp-adjust { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; padding: 10px; opacity: 0.7; transition: 0.2s; }
+.btn-temp-adjust:hover { opacity: 1; color: var(--primary); }
+.current-temp { font-size: 32px; font-weight: 700; color: var(--primary); display: flex; align-items: center; }
+.current-temp span { font-size: 16px; margin-left: 4px; margin-top: -10px; }
+.mode-selector { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 24px; }
+.mode-btn { white-space: nowrap; padding: 10px 16px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid transparent; color: #9CA3AF; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.mode-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.mode-btn.active { background: #fff; color: #14142F; }
+.fan-speed-container { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; }
+.fan-label { font-size: 13px; color: #9CA3AF; margin-bottom: 12px; display: block; font-weight: 600; }
+.fan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.fan-btn { padding: 12px; border-radius: 10px; background: #1B1B3A; border: 1px solid rgba(255,255,255,0.05); color: #9CA3AF; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.fan-btn svg { width: 16px; height: 16px; }
+.fan-btn.active { border-color: var(--primary); background: rgba(253, 53, 102, 0.1); color: var(--primary); }
+
 </style>
 </head>
 <body>
@@ -322,7 +389,7 @@ input:checked + .slider:before { transform: translateX(14px); }
 
 <div class="app-container" id="app-container">
   <aside class="sidebar">
-    <div class="logo-box"><img src="assets/Logo%20vector.png" alt="Logo"></div>
+    <div class="logo-box"><img src="assets/Rogo_logo.png" alt="Logo"></div>
     <div class="nav-item active" id="tab-dashboard" title="Điều khiển">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
     </div>
@@ -409,7 +476,7 @@ input:checked + .slider:before { transform: translateX(14px); }
         </div>
         <div class="chart-placeholder" id="chart-container">
           <div class="chart-tooltip" id="chart-tooltip"></div>
-          <svg class="chart-svg" id="report-svg" viewBox="0 0 800 250" preserveAspectRatio="none">
+          <svg class="chart-svg" id="report-svg" viewBox="0 0 1200 250" preserveAspectRatio="none">
             <line id="hover-line" class="chart-indicator" x1="0" y1="0" x2="0" y2="250" />
             <g id="chart-groups"></g>
           </svg>
@@ -540,8 +607,24 @@ function updateDashboard(k) {
   p.classList.remove('animate-update'); void p.offsetWidth; p.classList.add('animate-update');
   document.getElementById('current-location-title').innerText = d.title;
   document.getElementById('scenarios-container').innerHTML = d.scenarios.map(s => `<div class="scenario-card" onclick="showToast('Kịch bản: ${s.title} đã kích hoạt!')"><h5>${s.title}</h5><p>${s.desc}</p><div class="dots">⋮</div></div>`).join('');
-  document.getElementById('ac-container').innerHTML = d.ac.map(a => `<div class="device-item"><span>${a.name}</span><div class="device-status">${a.status} <label class="switch"><input type="checkbox" ${a.on?'checked':''}><span class="slider"></span></label></div></div>`).join('');
-  document.getElementById('light-container').innerHTML = d.lights.map(l => `<div class="device-item"><span>${l.name}</span><label class="switch"><input type="checkbox" ${l.on?'checked':''}><span class="slider"></span></label></div>`).join('');
+  document.getElementById('ac-container').innerHTML = d.ac.map(a => `
+    <div class="device-item" style="cursor:pointer" onclick="openACModal('${a.name}', '${a.status}', '${d.title}', ${a.on})">
+      <span>${a.name}</span>
+      <div class="device-status">${a.status} 
+        <label class="switch" onclick="event.stopPropagation()">
+          <input type="checkbox" ${a.on?'checked':''}>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>`).join('');
+  document.getElementById('light-container').innerHTML = d.lights.map(l => `
+    <div class="device-item" style="cursor:pointer" onclick="openLightModal('${l.name}', ${l.on}, '${d.title}')">
+      <span>${l.name}</span>
+      <label class="switch" onclick="event.stopPropagation()">
+        <input type="checkbox" ${l.on?'checked':''}>
+        <span class="slider"></span>
+      </label>
+    </div>`).join('');
   document.getElementById('sensor-env').innerHTML = d.env.map(e => `<div class="sensor-box"><span>${e.label}</span><strong>${e.value}</strong></div>`).join('');
   document.getElementById('sensor-security').innerHTML = d.security.map(s => `<div class="sensor-box"><span>${s.label}</span><strong style="color:${s.color||'inherit'}">${s.value}</strong></div>`).join('');
 }
@@ -551,12 +634,9 @@ function renderChart(range) {
   const g = document.getElementById('chart-groups');
   const svg = document.getElementById('report-svg');
   if(!svg || !g) return;
-  const width = 800;
+  const width = 1200;
   const height = 250;
-  
-  // Symmetrical margins for a clean, centered look
-  const mLeft = 20;
-  const mRight = 20;
+  const mLeft = 0, mRight = 0;
   const chartW = width - mLeft - mRight;
 
   const getX = (i) => mLeft + (i / (data.labels.length - 1)) * chartW;
@@ -564,30 +644,28 @@ function renderChart(range) {
   const getY = (v, scale=1) => height - ((v * scale) / maxVal) * height;
 
   let gridHtml = '';
-  // Draw horizontal grid lines only
   for(let i=0; i<=5; i++) {
     const y = height - (i / 5) * height;
     gridHtml += `<line class="grid-line" x1="${mLeft}" y1="${y}" x2="${width - mRight}" y2="${y}" />`;
   }
 
-  // Draw X-axis labels
   for(let i=0; i<data.labels.length; i++) {
     if(range === 'month' && i % 5 !== 0 && i !== 29) continue; 
     const x = getX(i);
     let dateLabel = "";
     if(range === 'week') {
       const d = new Date(2026, 3, 9 + i); 
-      dateLabel = `${d.getDate().toString().padStart(2, '0')}/04/2026`;
+      dateLabel = `${d.getDate().toString().padStart(2, '0')}/04`;
     } else if(range === 'month') {
-      dateLabel = `${(i+1).toString().padStart(2, '0')}/04/2026`;
+      dateLabel = `${(i+1).toString().padStart(2, '0')}/04`;
     } else {
-      dateLabel = data.labels[i] + "/2026";
+      dateLabel = data.labels[i];
     }
     const anchor = (i === 0) ? "start" : (i === data.labels.length - 1 ? "end" : "middle");
     gridHtml += `<text class="axis-label" x="${x}" y="${height + 25}" text-anchor="${anchor}">${dateLabel}</text>`;
   }
 
-  const solve = (arr, scale=1) => {
+  const solve = (arr, scale=1, isArea=false) => {
     const points = arr.map((v, i) => ({x: getX(i), y: getY(v, scale)}));
     let d = `M ${points[0].x} ${points[0].y}`;
     for (let i = 0; i < points.length - 1; i++) {
@@ -595,14 +673,24 @@ function renderChart(range) {
       const cpX = p0.x + (p1.x - p0.x) / 2;
       d += ` C ${cpX} ${p0.y}, ${cpX} ${p1.y}, ${p1.x} ${p1.y}`;
     }
+    if (isArea) {
+      d += ` L ${points[points.length-1].x} ${height} L ${points[0].x} ${height} Z`;
+    }
     return d;
   };
 
   const dPower = solve(data.power, 1);
   const dCost = solve(data.cost, 1/4); 
   const dCarbon = solve(data.carbon, 1.8);
+  
+  const aPower = solve(data.power, 1, true);
+  const aCost = solve(data.cost, 1/4, true);
+  const aCarbon = solve(data.carbon, 1.8, true);
 
   g.innerHTML = gridHtml + `
+    <path class="chart-area" d="${aPower}" fill="#10b981" />
+    <path class="chart-area" d="${aCost}" fill="#FD3566" />
+    <path class="chart-area" d="${aCarbon}" fill="#f59e0b" />
     <path class="chart-line" d="${dPower}" stroke="#10b981" fill="none" />
     <path class="chart-line" d="${dCost}" stroke="#FD3566" fill="none" />
     <path class="chart-line" d="${dCarbon}" stroke="#f59e0b" fill="none" />
@@ -706,6 +794,95 @@ document.getElementById('location-list').addEventListener('click', (e) => {
 
 updateDashboard('living');
 
+let acCurrentTemp = 24;
+
+function openACModal(name, status, loc, isOn) {
+  document.getElementById('ac-modal-name').innerText = name;
+  document.getElementById('ac-modal-loc').innerText = loc;
+  document.getElementById('ac-light-switch').checked = isOn;
+  const tempMatch = status.match(/(\d+)/);
+  if(tempMatch) acCurrentTemp = parseInt(tempMatch[1]);
+  else acCurrentTemp = 24;
+  updateACTempDisplay();
+  toggleACPower();
+  document.getElementById('ac-modal').style.display = 'flex';
+}
+
+function closeACModal() { document.getElementById('ac-modal').style.display = 'none'; }
+
+function toggleACPower() {
+  const isOn = document.getElementById('ac-light-switch').checked;
+  document.getElementById('ac-power-box').classList.toggle('active', isOn);
+}
+
+function adjustTemp(delta) {
+  acCurrentTemp += delta;
+  if(acCurrentTemp < 16) acCurrentTemp = 16;
+  if(acCurrentTemp > 30) acCurrentTemp = 30;
+  updateACTempDisplay();
+}
+
+function updateACTempDisplay() {
+  document.getElementById('ac-temp-val').innerHTML = `${acCurrentTemp}<span>°C</span>`;
+}
+
+function setACMode(btn, mode) {
+  document.querySelectorAll('#ac-mode-selector .mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setFanSpeed(btn, speed) {
+  document.querySelectorAll('.fan-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+let currentBrightness = 100, currentTemp = 4600;
+
+function openLightModal(name, isOn, loc) {
+  document.getElementById('modal-device-name').innerText = name;
+  document.getElementById('modal-device-loc').innerText = loc;
+  document.getElementById('modal-light-switch').checked = isOn;
+  document.getElementById('light-modal').style.display = 'flex';
+  setBrightness(100); updateTemp(4600); toggleModalPower();
+}
+
+function closeLightModal() { document.getElementById('light-modal').style.display = 'none'; }
+
+function toggleModalPower() {
+  const isOn = document.getElementById('modal-light-switch').checked;
+  document.getElementById('power-toggle-container').classList.toggle('active', isOn);
+  document.getElementById('status-bar-display').classList.toggle('active', isOn);
+  applyLightEffects();
+}
+
+function setBrightness(v) {
+  currentBrightness = v;
+  document.getElementById('status-percent-text').innerText = v + '%';
+  document.getElementById('summary-brightness').innerText = v + '%';
+  document.querySelectorAll('.btn-percent').forEach(b => b.classList.toggle('active', b.innerText === v+'%'));
+  applyLightEffects();
+}
+
+function updateTemp(v) {
+  currentTemp = v;
+  document.getElementById('temp-slider').value = v;
+  document.getElementById('temp-val-text').innerText = v + 'k';
+  document.getElementById('summary-temp').innerText = v + 'k';
+  applyLightEffects();
+}
+
+function applyLightEffects() {
+  const isOn = document.getElementById('modal-light-switch').checked, imgBulb = document.getElementById('bulb-preview-img'), imgGlow = document.getElementById('bulb-brightness-img'), glowDiv = document.getElementById('bulb-glow');
+  if (!isOn) { imgBulb.src = 'assets/LedBuldOff.png'; imgGlow.style.opacity = '0'; glowDiv.style.opacity = '0'; return; }
+  imgBulb.src = 'assets/LedBuldOn.png';
+  imgGlow.src = currentTemp <= 4500 ? 'assets/BrightnessWarm.png' : 'assets/BrightnessCold.png';
+  const it = currentBrightness / 100;
+  imgGlow.style.opacity = (0.15 + it * 0.35).toString();
+  let r, g, b; if (currentTemp <= 4600) { r = 255; g = 180; b = 80; } else { r = 100; g = 180; b = 255; }
+  glowDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b})`; glowDiv.style.opacity = (it * 0.2).toString(); glowDiv.style.boxShadow = `0 0 100px 50px rgb(${r}, ${g}, ${b})`;
+  imgBulb.style.filter = `brightness(${1.0 + it * 0.1}) saturate(1.1)`;
+}
+
 function handleLogin() {
   const email = document.getElementById('login-email').value;
   const pass = document.getElementById('login-pass').value;
@@ -725,5 +902,118 @@ function handleLogin() {
   showToast('Đăng nhập thành công!');
 }
 </script>
+<!-- AC Control Modal -->
+<div id="ac-modal" class="modal-overlay" onclick="if(event.target === this) closeACModal()">
+  <div class="ac-modal-content">
+    <div class="ac-header">
+      <div>
+        <h3 id="ac-modal-name">Điều hòa trần 1</h3>
+        <p id="ac-modal-loc">Phòng tiếp khách</p>
+      </div>
+      <button class="close-modal-x" onclick="closeACModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="temp-control-row">
+      <div class="ac-power-box" id="ac-power-box" onclick="toggleACPower()">
+        <label class="blue-switch" onclick="event.stopPropagation()">
+          <input type="checkbox" id="ac-light-switch" onchange="toggleACPower()">
+          <span class="blue-slider"></span>
+        </label>
+      </div>
+      <div class="temp-display-box">
+        <button class="btn-temp-adjust" onclick="adjustTemp(-1)">−</button>
+        <div class="current-temp" id="ac-temp-val">24<span>°C</span></div>
+        <button class="btn-temp-adjust" onclick="adjustTemp(1)">+</button>
+      </div>
+    </div>
+
+    <div class="mode-selector" id="ac-mode-selector">
+      <button class="mode-btn active" onclick="setACMode(this, 'auto')">Tự động</button>
+      <button class="mode-btn" onclick="setACMode(this, 'cool')">Làm lạnh</button>
+      <button class="mode-btn" onclick="setACMode(this, 'dry')">Làm khô</button>
+      <button class="mode-btn" onclick="setACMode(this, 'heat')">Sưởi ấm</button>
+      <button class="mode-btn" onclick="setACMode(this, 'fan')">Quạt gió</button>
+    </div>
+
+    <div class="fan-speed-container">
+      <span class="fan-label">Chế độ quạt</span>
+      <div class="fan-grid">
+        <button class="fan-btn active" onclick="setFanSpeed(this, 'auto')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M4.93 4.93l1.41 1.41M2 12h2M4.93 19.07l1.41-1.41M12 22v-2M17.66 17.66l-1.41-1.41M22 12h-2M17.66 6.34l-1.41 1.41"/></svg>
+          Auto
+        </button>
+        <button class="fan-btn" onclick="setFanSpeed(this, 'low')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/></svg>
+          Low
+        </button>
+        <button class="fan-btn" onclick="setFanSpeed(this, 'med')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M23 12l-9.5 9.5-5-5L1 24"/></svg>
+          Med
+        </button>
+        <button class="fan-btn" onclick="setFanSpeed(this, 'high')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M23 12l-9.5 9.5-5-5L1 24"/><path d="M23 18l-9.5 9.5-5-5L1 30"/></svg>
+          High
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Light Control Modal Redesign -->
+<div id="light-modal" class="modal-overlay" onclick="if(event.target === this) closeLightModal()">
+  <div class="modal-content">
+    <div class="modal-left">
+      <h3 id="modal-device-name">Đèn LED 1</h3>
+      <div class="subtitle" id="modal-device-loc">Phòng tiếp khách</div>
+      <div class="power-status-row">
+        <div class="btn-power-toggle" id="power-toggle-container" onclick="toggleModalPower()">
+          <label class="blue-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="modal-light-switch" onchange="toggleModalPower()">
+            <span class="blue-slider"></span>
+          </label>
+        </div>
+        <div class="status-bar-large" id="status-bar-display">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <span id="status-percent-text">100%</span>
+        </div>
+      </div>
+      <span class="control-label">Độ sáng</span>
+      <div class="brightness-btns">
+        <button class="btn-percent" onclick="setBrightness(20)">20%</button>
+        <button class="btn-percent" onclick="setBrightness(40)">40%</button>
+        <button class="btn-percent" onclick="setBrightness(60)">60%</button>
+        <button class="btn-percent" onclick="setBrightness(80)">80%</button>
+        <button class="btn-percent active" onclick="setBrightness(100)">100%</button>
+      </div>
+      <span class="control-label">Nhiệt độ màu</span>
+      <div class="temp-control-container">
+        <div class="temp-slider-wrapper">
+          <input type="range" class="temp-input-range" id="temp-slider" min="2700" max="6500" value="4600" oninput="updateTemp(this.value)">
+          <div class="temp-val-box" id="temp-val-text">4600k</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-right">
+      <button class="close-modal-x" onclick="closeLightModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-right-content">
+        <h4>Đèn LED Bulb thông minh</h4>
+        <div class="bulb-display-container">
+          <div id="bulb-glow"></div>
+          <img id="bulb-brightness-img" src="assets/BrightnessCold.png" alt="Glow Effect">
+          <img id="bulb-preview-img" src="assets/LedBuldOn.png" alt="Bulb">
+        </div>
+        <div class="summary-items">
+          <div class="summary-item"><span>Nhiệt độ màu</span><span class="val" id="summary-temp">4600k</span></div>
+          <div class="summary-item"><span>Độ sáng</span><span class="val" id="summary-brightness">100%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
